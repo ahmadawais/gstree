@@ -4,8 +4,8 @@
   "description": "CLI to sync folders with separate GitHub repos. Like git subtree, but simpler.",
   "type": "module",
   "bin": {
-    "gstree": "./dist/index.js",
-    "gst": "./dist/index.js"
+    "gstree": "dist/index.js",
+    "gst": "dist/index.js"
   },
   "scripts": {
     "build": "tsup",
