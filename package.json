@@ -1,0 +1,55 @@
+{
+  "name": "gstree",
+  "version": "0.0.1",
+  "description": "CLI to sync folders with separate GitHub repos. Like git subtree, but simpler.",
+  "type": "module",
+  "bin": {
+    "gstree": "./dist/index.js",
+    "gst": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "keywords": [
+    "git",
+    "subtree",
+    "cli",
+    "monorepo",
+    "sync",
+    "github"
+  ],
+  "author": "Ahmad Awais <me@ahmadawais.com> (https://ahmadawais.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmadawais/gstree.git"
+  },
+  "homepage": "https://github.com/ahmadawais/gstree#readme",
+  "bugs": {
+    "url": "https://github.com/ahmadawais/gstree/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.6"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.8.2",
+    "commander": "^12.1.0",
+    "ora": "^9.0.0",
+    "picocolors": "^1.1.1"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

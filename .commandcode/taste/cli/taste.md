@@ -1,0 +1,26 @@
+# Cli
+- Use pnpm as the package manager for CLI projects. Confidence: 0.95
+- Use TypeScript for CLI projects. Confidence: 0.95
+- Use tsup as the build tool for CLI projects. Confidence: 0.95
+- Use vitest for testing CLI projects. Confidence: 0.95
+- Use commander for CLI command handling. Confidence: 0.95
+- Use clack for interactive user input in CLI projects. Confidence: 0.95
+- Use pnpm link --global to test CLI tools locally. Confidence: 0.95
+- Check for existing CLI name conflicts before running npm link. Confidence: 0.95
+- Organize CLI commands in a dedicated commands folder with each module separated. Confidence: 0.95
+- Include a small 150px ASCII art welcome banner displaying the CLI name. Confidence: 0.95
+- Use lowercase flags for version and help commands (-v, --version, -h, --help). Confidence: 0.85
+- Start projects with version 0.0.1 instead of 1.0.0. Confidence: 0.85
+- Version command should output only the version number with no ASCII art, banner, or additional information. Confidence: 0.90
+- Read CLI version from package.json instead of hardcoding it in the source code. Confidence: 0.75
+- For git subtree tools: Name subtree repos as "mainrepo-pathname", inherit main repo visibility (private/public), and allow -p/--private flag override. Confidence: 0.75
+- Build comprehensive CLI tools that handle complete workflows rather than minimal single-purpose commands. Confidence: 0.70
+- Default to GitHub CLI (gh) for GitHub operations with SSH as optional fallback; check if gh CLI is installed and prompt to install if missing. Confidence: 0.80
+- When creating GitHub repos via CLI, prompt user to select organization vs personal account. Confidence: 0.75
+- Use ora for loading spinners to show progress during CLI operations. Confidence: 0.85
+- Use HTTPS URLs by default for git operations when GitHub CLI authentication is available. Confidence: 0.75
+- For git subtree tools: pull and push commands should only operate on subtrees (not main repo); use sync or save commands for operations that include main repo. Confidence: 0.70
+- Use emoji log format for commit messages with emojis like 📦 NEW:, 👌 IMPROVE:, and 🔄 for sync operations. Confidence: 0.85
+- Provide helpful, actionable error messages that guide users on how to fix issues (e.g., when git operations fail due to uncommitted changes, suggest committing first). Confidence: 0.70
+- For git subtree tools: default to simple file copy mode (copy folder to new repo and back) instead of git subtree commands; make git subtree mode available behind a flag. Confidence: 0.75
+- When auto-generating values (like repo names), prompt user with the generated value as a pre-filled suggestion that they can edit rather than using it automatically. Confidence: 0.70
