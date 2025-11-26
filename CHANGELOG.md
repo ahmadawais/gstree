@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.2 (2025-11-26)
+
+### 🐛 FIX
+
+- Exclude gitignored files from push - Files matching `.gitignore` patterns (like `.env`) are now excluded when pushing to synced repos
+
 ## 0.0.1 (2025-11-25)
 
 ### 📦 NEW
