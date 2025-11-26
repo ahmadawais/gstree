@@ -1,6 +1,6 @@
 {
   "name": "gstree",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CLI to sync folders with separate GitHub repos. Like git subtree, but simpler.",
   "type": "module",
   "bin": {

@@ -46,16 +46,16 @@ export function subtreePush(prefix: string, remote: string, branch: string): voi
   const tempDir = `/tmp/gstree-push-${Date.now()}`;
   const repoRoot = exec('git rev-parse --show-toplevel');
   const fullPath = `${repoRoot}/${prefix}`;
-  
+
   exec(`git clone --depth 1 "${url}" "${tempDir}"`);
-  exec(`rsync -a --delete --exclude='.git' "${fullPath}/" "${tempDir}/"`);
-  
+  exec(`rsync -a --delete --exclude='.git' --filter=':- .gitignore' "${fullPath}/" "${tempDir}/"`);
+
   const status = execSync(`git -C "${tempDir}" status --porcelain`, { encoding: 'utf-8' }).trim();
   if (!status) {
     exec(`rm -rf "${tempDir}"`);
     return;
   }
-  
+
   exec(`git -C "${tempDir}" add -A`);
   exec(`git -C "${tempDir}" commit -m "📦 SYNC: ${prefix}"`);
   execSync(`git -C "${tempDir}" push origin ${branch}`, { stdio: 'inherit' });
@@ -88,9 +88,9 @@ export function copyPush(prefixes: string[], remote: string, branch: string): vo
   const url = toHttpsUrl(remote);
   const tempDir = `/tmp/gstree-push-${Date.now()}`;
   const repoRoot = exec('git rev-parse --show-toplevel');
-  
+
   exec(`git clone --depth 1 "${url}" "${tempDir}"`);
-  
+
   // Remove old files in prefixes from temp
   for (const prefix of prefixes) {
     const destPath = join(tempDir, prefix);
@@ -98,24 +98,24 @@ export function copyPush(prefixes: string[], remote: string, branch: string): vo
       rmSync(destPath, { recursive: true, force: true });
     }
   }
-  
-  // Copy current files
+
+  // Copy current files using rsync to respect .gitignore
   for (const prefix of prefixes) {
     const srcPath = join(repoRoot, prefix);
     const destPath = join(tempDir, prefix);
-    
+
     if (existsSync(srcPath)) {
-      mkdirSync(dirname(destPath), { recursive: true });
-      cpSync(srcPath, destPath, { recursive: true });
+      mkdirSync(destPath, { recursive: true });
+      exec(`rsync -a --exclude='.git' --filter=':- .gitignore' "${srcPath}/" "${destPath}/"`);
     }
   }
-  
+
   const status = execSync(`git -C "${tempDir}" status --porcelain`, { encoding: 'utf-8' }).trim();
   if (!status) {
     exec(`rm -rf "${tempDir}"`);
     return;
   }
-  
+
   exec(`git -C "${tempDir}" add -A`);
   exec(`git -C "${tempDir}" commit -m "📦 SYNC: ${prefixes.join(', ')}"`);
   execSync(`git -C "${tempDir}" push origin ${branch}`, { stdio: 'inherit' });
